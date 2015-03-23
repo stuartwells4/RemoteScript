@@ -4,7 +4,7 @@ import os
 import cmd
 
 print os.getlogin()
-c = cmd.CmdSSH(os.getlogin(), "localhost", "passwd");
+c = cmd.CmdSSH(os.getlogin(), "127.0.0.1");
 if True == c.exists():
     c.execute("ls")
     print c.getoutput()
