@@ -62,7 +62,9 @@ class SystemShell:
                 time.sleep(0.5)
                 timecurrent = datetime.datetime.now()
                 if (timecurrent - timestart).seconds > self.timeout:
-                    if os.uname()[0] == "Linux":
+                    if "Linux" == os.uname()[0]:
+                        os.kill(data.pid, signal.SIGKILL)
+                    elif "Darwin" == os.uname()[0]:
                         os.kill(data.pid, signal.SIGKILL)
                     else:
                         os.kill(data.pid, signal.CTRL_C_EVENT)

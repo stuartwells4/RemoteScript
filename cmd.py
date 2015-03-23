@@ -77,7 +77,11 @@ class CmdSSH(CmdBase):
     # Does the machine exist?
     def exists(self):
         rtncode = False
-        command = "ping " + self.machine + " -c 1"
+        if "Darwin" == os.uname()[0]:
+            command = "ping -c 1 " + self.machine
+        else:
+            command = "ping " + self.machine + " -c 1"
+
         rval = self.shell.execute(command);
         if 0 == rval:
             rtncode = True
